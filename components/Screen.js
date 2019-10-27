@@ -4,11 +4,21 @@ import { Text, StyleSheet, View } from 'react-native'
 
 class Screen extends React.Component {
 	render() {
-		return (
-			<View style={styles.mainContainer} >
-				<Text style={styles.math}>{this.props.strToShow}</Text>
-			</View>
-		)
+
+		if (this.props.calculating == true) {
+			return (
+				<View style={styles.mainContainer} >
+					<Text style={styles.math}>{this.props.strToShow}</Text>
+					<Text style={styles.result}>{this.props.result}</Text>
+				</View>
+			)
+		} else {
+			return (
+				<View style={styles.mainContainer} >
+					<Text style={styles.math}>{this.props.strToShow}</Text>
+				</View>
+			)
+		}
 	}
 }
 

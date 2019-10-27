@@ -7,19 +7,24 @@ class Calculator extends React.Component {
 
 	constructor(props) {
 		super(props)
-		this.state = {calcul: '', result: ''}
+		this.state = {calculOnScreen: '', result: 0, calculating: false}
 	}
 
 	upCalc(strToAdd) {
-		this.setState({calcul:this.state.calcul+strToAdd})
-		console.log(this.state);
+		if (strToAdd == ' = ') {
+			this.setState({calculating: true})
+			this.props = {calculFormated: this.state.calculOnScreen.replace(/ x /g, '*')}
+			this.setState({result: eval(this.props.calculFormated)})
+		} else {
+			this.setState({calculOnScreen:this.state.calculOnScreen+strToAdd})
+		}
 	}
 
 	render() {
 		return (
 			<View style={styles.mainContainer}>
 				<View style={styles.screenBox}>
-					<Screen strToShow={this.state.calcul} />
+					<Screen strToShow={this.state.calculOnScreen} result={this.state.result} calculating={this.state.calculating} />
 				</View>
 				<View style={styles.KeyboardBox}>
 
@@ -48,9 +53,9 @@ class Calculator extends React.Component {
 						<Key texte={'/'} clickHandler={() => {this.upCalc(' / ')}} />
 					</View>
 					<View style={styles.line}>
-						<Key texte={'C'} clickHandler={() => {this.setState({calcul:''})}} />
-						<Key texte={','} clickHandler={() => {this.upCalc(',')}} />
-						<Key texte={'^'} clickHandler={() => {this.upCalc('^')}} />
+						<Key texte={'C'} clickHandler={() => {this.setState({calculOnScreen:''}); this.setState({result:0}); this.setState({calculating: false})}} />
+						<Key texte={','} clickHandler={() => {this.upCalc('.')}} />
+						<Key texte={'%'} clickHandler={() => {this.upCalc('%')}} />
 						<Key texte={'='} clickHandler={() => {this.upCalc(' = ')}} />
 					</View>
 				</View>

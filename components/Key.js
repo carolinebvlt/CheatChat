@@ -12,7 +12,7 @@ class Keyboard extends React.Component {
 					<Text style={styles.number}>{this.props.texte}</Text>
 				</TouchableOpacity>
 			)
-		} else {
+		}  else {
 			return (
 				<TouchableOpacity style={styles.key} onPress={this.props.clickHandler} >
 					<Text style={styles.char}>{this.props.texte}</Text>
