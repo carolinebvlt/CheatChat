@@ -1,10 +1,10 @@
 import React from 'react'
-import Calculator from './components/Calculator'
+import Navigation from './Navigation/Navigation'
 
 export default class App extends React.Component {
   render() {
     return (
-      <Calculator/>
+      <Navigation/>
     )
   }
 }

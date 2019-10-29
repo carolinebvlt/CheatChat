@@ -10,17 +10,31 @@ class Calculator extends React.Component {
 		this.state = {calculOnScreen: '', result: 0, calculating: false}
 	}
 
+	static defaultProps = {
+		cheatCode: '7'
+	}
+
 	upCalc(strToAdd) {
 		if (strToAdd == ' = ') {
-			this.setState({calculating: true})
-			this.props = {calculFormated: this.state.calculOnScreen.replace(/ x /g, '*')}
-			this.setState({result: eval(this.props.calculFormated)})
+			console.log(this.props.cheatCode);
+			if (this.state.calculOnScreen == this.props.cheatCode) {
+				this.goOnCheatChat()
+			} else {
+				this.setState({calculating: true})
+				this.props = {calculFormated: this.state.calculOnScreen.replace(/ x /g, '*')}
+				this.setState({result: eval(this.props.calculFormated)})
+			}
 		} else {
 			this.setState({calculOnScreen:this.state.calculOnScreen+strToAdd})
 		}
 	}
 
+	goOnCheatChat() {
+		this.props.navigation.navigate("CheatChat")
+	}
+
 	render() {
+		console.log(this);
 		return (
 			<View style={styles.mainContainer}>
 				<View style={styles.screenBox}>
